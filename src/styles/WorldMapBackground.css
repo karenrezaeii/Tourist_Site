@@ -1,0 +1,125 @@
+/* src/styles/WorldMapBackground.css */
+
+.world-map-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  /* The two darkest jade shades only — no bright green in the backdrop */
+  background: radial-gradient(
+    circle at 50% 35%,
+    var(--color-blue-900) 0%,
+    var(--color-bg-dark) 80%
+  );
+}
+
+/* Small twinkling stars behind the map, same idea as before but subtler.
+   Hidden in light mode, where a starfield doesn't make sense. */
+.world-map-stars {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(1.5px 1.5px at 15% 20%, #ffffff 100%, transparent 0),
+    radial-gradient(1.5px 1.5px at 40% 70%, #ffffff 100%, transparent 0),
+    radial-gradient(1px 1px at 65% 15%, #ffffff 100%, transparent 0),
+    radial-gradient(1.5px 1.5px at 85% 60%, #ffffff 100%, transparent 0),
+    radial-gradient(1px 1px at 25% 85%, #ffffff 100%, transparent 0);
+  background-repeat: repeat;
+  background-size: 600px 600px;
+  opacity: 0.4;
+  transition: opacity var(--transition-fast);
+}
+
+:root[data-theme="light"] .world-map-stars {
+  opacity: 0;
+}
+
+/* The SVG map itself, centered behind the "World Explorer" title.
+   The width is the SMALLEST of: a hard cap (1400px), 90% of the
+   viewport's width, or (80% of the viewport's height converted to an
+   equivalent width using the map's own aspect ratio). Because it's
+   always the smallest of the three, the box can never be taller or
+   wider than the visible window — so the whole map is always fully
+   visible, never clipped, on any screen size. Height then follows
+   automatically from aspect-ratio, so nothing is ever stretched or
+   cropped. */
+.world-map-svg-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(1550px, 94vw, calc(86vh * 1.70945));
+  aspect-ratio: 784.077 / 458.627;
+  transform: translate(-50%, -50%);
+}
+
+.world-map-svg-inner svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* --- Default look for every country on the map --- */
+.world-map-svg-inner svg path,
+.world-map-svg-inner svg g path {
+  fill: var(--color-blue-700);
+  stroke: var(--color-blue-glow);
+  stroke-width: 1.2;
+  opacity: 0.55;
+}
+
+/* --- The 10 countries featured in this project get a strong, fully
+   opaque fill, even when not active, so they stand out clearly
+   from the rest of the (dimmer) map --- */
+.world-map-svg-inner svg #ir path,
+.world-map-svg-inner svg #tr path,
+.world-map-svg-inner svg #ae path,
+.world-map-svg-inner svg #us path,
+.world-map-svg-inner svg #de path,
+.world-map-svg-inner svg #fr path,
+.world-map-svg-inner svg #ch path,
+.world-map-svg-inner svg #no path,
+.world-map-svg-inner svg #sn path,
+.world-map-svg-inner svg #nl path {
+  fill: var(--color-blue-500);
+  stroke: var(--color-text-main);
+  stroke-width: 1.5;
+  opacity: 1;
+  transition: fill var(--transition-fast), stroke var(--transition-fast);
+}
+
+/* --- Active country turns into the accent color (Petronas teal in dark
+   mode, crimson in light mode). One rule per country.
+   The data-active value matches each country's "id" field in
+   countries.js (e.g. "iran"), while the #xx selector matches the
+   map's ISO 3166-1 alpha-2 code (e.g. #ir) — these are two different
+   codes for the same country, so each line below pairs them up. --- */
+.world-map-wrapper[data-active="iran"] #ir path,
+.world-map-wrapper[data-active="turkey"] #tr path,
+.world-map-wrapper[data-active="uae"] #ae path,
+.world-map-wrapper[data-active="usa"] #us path,
+.world-map-wrapper[data-active="germany"] #de path,
+.world-map-wrapper[data-active="france"] #fr path,
+.world-map-wrapper[data-active="switzerland"] #ch path,
+.world-map-wrapper[data-active="norway"] #no path,
+.world-map-wrapper[data-active="senegal"] #sn path,
+.world-map-wrapper[data-active="netherlands"] #nl path {
+  fill: var(--color-orange);
+  stroke: var(--color-orange-light);
+  stroke-width: 1.5;
+}
+
+/* --- Vignette so the "World Explorer" text and cards stay readable.
+   Uses the theme's own background color (via its RGB channels) so it
+   automatically matches dark or light mode. --- */
+.world-map-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--color-bg-dark-rgb), 0.05) 0%,
+    rgba(var(--color-bg-dark-rgb), 0.3) 40%,
+    rgba(var(--color-bg-dark-rgb), 0.85) 75%,
+    rgba(var(--color-bg-dark-rgb), 0.97) 100%
+  );
+  transition: background var(--transition-fast);
+}

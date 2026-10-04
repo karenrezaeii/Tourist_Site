@@ -1,0 +1,132 @@
+/* src/styles/CountryPage.css */
+
+.country-page {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Flag as full-page fixed background */
+.country-page__flag-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(2px) brightness(0.55);
+  transform: scale(1.05); /* avoid blurred edges showing */
+}
+
+/* Dark blue-tinted overlay so text stays readable over any flag */
+.country-page__flag-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--color-bg-dark-rgb), 0.75) 0%,
+    rgba(var(--color-bg-dark-rgb), 0.9) 100%
+  );
+}
+
+.country-page__content {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 96px 6% 100px; /* clears the fixed CityNavbar above it */
+}
+
+/* On desktop this link now lives inside the fixed CityNavbar instead,
+   so the standalone version here is hidden there and only shown on
+   mobile (where the navbar bar itself is hidden). */
+.country-page__back {
+  display: none;
+  color: var(--color-blue-glow);
+  font-weight: 500;
+  margin-bottom: 30px;
+  transition: color var(--transition-fast);
+}
+
+@media (max-width: 700px) {
+  .country-page__back {
+    display: inline-block;
+  }
+}
+
+.country-page__back:hover {
+  color: var(--color-orange);
+}
+
+.country-page__header {
+  text-align: center;
+  padding: 40px 0 60px;
+}
+
+.country-page__title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  color: var(--color-text-main);
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+}
+
+.country-page__section-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-blue-glow);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--color-blue-700);
+}
+
+.country-page__history {
+  margin-bottom: 70px;
+}
+
+.country-page__history-text {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--color-text-muted);
+  background: rgba(var(--color-surface-rgb), 0.4);
+  border: 1px solid var(--color-blue-700);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+}
+
+.country-page__cities-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.country-page__cities-list > * + * {
+  border-top: 1px solid rgba(var(--color-glow-rgb), 0.15);
+}
+
+/* Fallback view for an invalid country id in the URL */
+.country-not-found {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: var(--color-text-main);
+}
+
+.country-not-found__link {
+  color: var(--color-blue-glow);
+}
+
+.country-not-found__link:hover {
+  color: var(--color-orange);
+}
+
+/* The desktop CityNavbar bar is hidden on mobile (replaced by the
+   hamburger MobileMenu), so this page doesn't need as much clearance
+   at the top anymore — just enough to clear the small icon buttons. */
+@media (max-width: 700px) {
+  .country-page__content {
+    padding-top: 76px;
+  }
+}

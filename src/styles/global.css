@@ -1,0 +1,130 @@
+/* src/styles/global.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+/* Exact colors from the Mercedes 2022 Petronas livery:
+   #00A19C (teal), #80142B (maroon), #C6C6C6 (light gray), #111111 (near black)
+   Dark mode uses teal for hover + maroon for info-card surfaces.
+   Light mode swaps those two roles, using the same four colors. */
+
+:root {
+  /* Dark mode (default): very dark jade / near-black background */
+  --color-bg-dark: #070f0d;
+  --color-bg-dark-rgb: 7, 15, 13;
+  --color-blue-900: #0c1a17;
+  --color-blue-800: #122922;
+  --color-blue-700: #17392f;
+  --color-blue-600: #1d4a3c;
+  --color-blue-500: #2b6c58;
+  --color-blue-glow: #3fe0bb;
+
+  /* Hover / accent - Petronas teal */
+  --color-orange: #00a19c;
+  --color-orange-light: #33c2bc;
+  --color-orange-rgb: 0, 161, 156;
+  --color-orange-glow: 0 0 18px rgba(0, 161, 156, 0.55);
+
+  /* Info-card (description) surface - same Petronas teal as the hover
+     color, with dark jade text on top of it for contrast */
+  --color-card-accent: #00a19c;
+  --color-card-text: #04120f;
+
+  --color-navbar-bg: rgba(12, 26, 23, 0.92);
+
+  --color-surface-rgb: 18, 41, 34;
+  --color-glow-rgb: 63, 224, 187;
+
+  --color-text-main: #eafaf5;
+  --color-text-muted: #a7cfc4;
+
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --transition-quick: 0.15s ease;
+  --transition-fast: 0.25s ease;
+  --transition-mid: 0.4s ease;
+
+  --font-main: "Poppins", "Segoe UI", Arial, sans-serif;
+}
+
+/* Light mode: same 4 Petronas colors, roles swapped */
+:root[data-theme="light"] {
+  --color-bg-dark: #d6d9d9;
+  --color-bg-dark-rgb: 214, 217, 217;
+  --color-blue-900: #c6c6c6;
+  --color-blue-800: #bcbfbf;
+  --color-blue-700: #a9adad;
+  --color-blue-600: #8f9494;
+  --color-blue-500: #767b7b;
+  --color-blue-glow: #4a5252;
+
+  /* Hover / accent - Petronas maroon in light mode */
+  --color-orange: #80142b;
+  --color-orange-light: #a52d45;
+  --color-orange-rgb: 128, 20, 43;
+  --color-orange-glow: 0 0 18px rgba(128, 20, 43, 0.35);
+
+  /* Info-card surface - same Petronas maroon as the hover color, with
+     light text on top of it for contrast */
+  --color-card-accent: #80142b;
+  --color-card-text: #f5e9ea;
+
+  --color-navbar-bg: rgba(198, 198, 198, 0.92);
+
+  --color-surface-rgb: 198, 198, 198;
+  --color-glow-rgb: 74, 82, 82;
+
+  --color-text-main: #111111;
+  --color-text-muted: #43494a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-main);
+  font-family: var(--font-main);
+  direction: ltr;
+  scroll-behavior: smooth;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+#root {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--color-orange);
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-blue-900);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-blue-600);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-orange);
+}

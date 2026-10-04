@@ -1,0 +1,99 @@
+/* src/styles/CityBlock.css */
+
+.city-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 36px 0;
+  scroll-margin-top: 90px;
+  /* No cursor here — cities aren't clickable, only the hover glow
+     on the image reacts, matching the country cards. */
+}
+
+.city-block--reversed {
+  flex-direction: row-reverse;
+}
+
+.city-block__image-wrap {
+  flex: 0 0 auto;
+  width: 34%;
+  max-width: 380px;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 2px solid var(--color-blue-700);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: transform var(--transition-quick), border-color var(--transition-quick),
+    box-shadow var(--transition-quick);
+}
+
+.city-block__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Petronas-colored info card, matching the country cards on the home page */
+.city-block__info {
+  flex: 1 1 auto;
+  max-width: 460px;
+  background: var(--color-card-accent);
+  border-radius: var(--radius-md);
+  padding: 22px 26px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transition: background var(--transition-fast);
+}
+
+.city-block__role {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--color-card-text);
+  opacity: 0.75;
+  margin-bottom: 8px;
+}
+
+.city-block__name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--color-card-text);
+}
+
+.city-block__description {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--color-card-text);
+  opacity: 0.85;
+}
+
+/* Hover reacts ONLY on the image itself now, fast and snappy */
+.city-block__image-wrap:hover {
+  transform: scale(1.04);
+  border-color: var(--color-orange);
+  box-shadow: var(--color-orange-glow);
+}
+
+@media (max-width: 800px) {
+  .city-block,
+  .city-block--reversed {
+    flex-direction: column;
+    gap: 8px; /* description sits right under the image */
+    padding: 20px 0;
+  }
+
+  .city-block__image-wrap {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .city-block__info {
+    max-width: 100%;
+  }
+}

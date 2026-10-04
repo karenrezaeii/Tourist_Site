@@ -1,0 +1,35 @@
+/* src/styles/ThemeToggle.css */
+
+.theme-toggle {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 999; /* stays above everything, on every page */
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid var(--color-blue-600);
+  background: var(--color-blue-800);
+  color: var(--color-text-main);
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  transition: border-color var(--transition-quick), transform var(--transition-quick),
+    box-shadow var(--transition-quick);
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-orange);
+  box-shadow: var(--color-orange-glow);
+  transform: scale(1.08);
+}
+
+/* On mobile the theme toggle lives inside the hamburger menu instead */
+@media (max-width: 700px) {
+  .theme-toggle {
+    display: none;
+  }
+}

@@ -1,0 +1,93 @@
+/* src/styles/MobileMenu.css */
+
+.mobile-menu {
+  display: none; /* shown only on mobile, see media query below */
+}
+
+.mobile-menu__controls {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 200;
+  display: flex;
+  gap: 8px;
+}
+
+.mobile-menu__icon-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--color-blue-600);
+  background: var(--color-navbar-bg);
+  color: var(--color-text-main);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition: border-color var(--transition-quick), transform var(--transition-quick);
+}
+
+.mobile-menu__icon-btn:hover {
+  border-color: var(--color-orange);
+  transform: scale(1.06);
+}
+
+.mobile-menu__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 190;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.mobile-menu__dropdown {
+  position: fixed;
+  top: 68px;
+  left: 16px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: var(--color-navbar-bg);
+  border: 1px solid var(--color-blue-700);
+  border-radius: var(--radius-md);
+  padding: 10px;
+  min-width: 220px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.mobile-menu__item {
+  font-family: inherit;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--transition-quick), color var(--transition-quick);
+}
+
+.mobile-menu__item:hover {
+  background: rgba(var(--color-orange-rgb), 0.12);
+  color: var(--color-orange);
+}
+
+.mobile-menu__theme {
+  margin-top: 6px;
+  border-top: 1px solid var(--color-blue-700);
+  padding-top: 14px;
+}
+
+/* Only appears on mobile; desktop navbar + floating theme toggle take
+   over above this breakpoint (see Navbar.css / ThemeToggle.css). */
+@media (max-width: 700px) {
+  .mobile-menu {
+    display: block;
+  }
+}

@@ -1,0 +1,122 @@
+/* src/styles/EarthBackground.css */
+
+.earth-bg-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: radial-gradient(
+    circle at 50% 30%,
+    var(--color-blue-900) 0%,
+    var(--color-bg-dark) 70%
+  );
+}
+
+/* --- Stars --- */
+.stars-layer {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(1.5px 1.5px at 20% 30%, #ffffff 100%, transparent 0),
+    radial-gradient(1.5px 1.5px at 60% 70%, #ffffff 100%, transparent 0),
+    radial-gradient(1px 1px at 80% 10%, #ffffff 100%, transparent 0),
+    radial-gradient(1px 1px at 35% 85%, #ffffff 100%, transparent 0),
+    radial-gradient(1.5px 1.5px at 90% 40%, #ffffff 100%, transparent 0),
+    radial-gradient(1px 1px at 10% 60%, #ffffff 100%, transparent 0),
+    radial-gradient(1.5px 1.5px at 50% 50%, #ffffff 100%, transparent 0);
+  background-repeat: repeat;
+  background-size: 600px 600px;
+  opacity: 0.5;
+  animation: starsDrift 120s linear infinite;
+}
+
+.stars-layer-2 {
+  background-size: 900px 900px;
+  opacity: 0.3;
+  animation-duration: 200s;
+  animation-direction: reverse;
+}
+
+@keyframes starsDrift {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-600px, 300px);
+  }
+}
+
+/* --- Earth sphere --- */
+.earth-sphere {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 900px;
+  height: 900px;
+  max-width: 140vw;
+  max-height: 140vw;
+  transform: translate(-50%, -45%);
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: inset -40px -40px 100px rgba(0, 0, 0, 0.6),
+    0 0 120px rgba(var(--color-glow-rgb), 0.25);
+}
+
+.earth-surface {
+  position: absolute;
+  inset: 0;
+  width: 200%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-blue-700) 0px,
+    var(--color-blue-600) 60px,
+    var(--color-blue-800) 120px,
+    var(--color-blue-500) 200px,
+    var(--color-blue-700) 260px
+  );
+  background-size: 50% 100%;
+  animation: earthRotate 60s linear infinite;
+  opacity: 0.85;
+}
+
+.earth-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    rgba(255, 255, 255, 0.18) 0%,
+    transparent 45%
+  );
+}
+
+@keyframes earthRotate {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* --- Vignette overlay so text/cards stay readable --- */
+.earth-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--color-bg-dark-rgb), 0.05) 0%,
+    rgba(var(--color-bg-dark-rgb), 0.3) 40%,
+    rgba(var(--color-bg-dark-rgb), 0.85) 75%,
+    rgba(var(--color-bg-dark-rgb), 0.97) 100%
+  );
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .stars-layer,
+  .stars-layer-2,
+  .earth-surface {
+    animation: none;
+  }
+}
